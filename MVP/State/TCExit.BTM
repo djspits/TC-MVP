@@ -1,0 +1,2 @@
+:: Finalizes a session or window.
+if %_pipe != 0 .or. %_transient != 0 quit

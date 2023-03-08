@@ -1,0 +1,92 @@
+CD {
+    iff %_batch == 0 then
+        iff %_tctab == 0 then
+            *CDD %$ && *DIR /H
+        else
+            *CDD /T %$
+        endiff
+    else
+        *CD %$
+    endiff
+}
+__Module {
+@if %_vermajor lt %3 TCFatal Module '%@name[%1]' requires TakeCommand version %3 or above.
+@echo off
+    iff not islabel %1 then
+        echoerr Module %@UPPER[%@NAME[%_batchname]] - version 0.9 - Copyright D.J. Spits. All rights reserved.
+        iff "%1" ne "" then
+            echoerr %1 is not implemented.
+        endiff
+    else
+        switch "%1"
+            case TCExport
+                gosub __TCExport 
+            case "SelfLoad" .OR. "SelfUnload" .OR. "SelfDeploy"
+                gosub %$
+            case "TCMain" .OR. "SelfTest"
+                setlocal
+                    set /T:int nAppExit=0
+                    gosub %$
+                    seterror %@AppStatus[]
+                endlocal
+        endswitch
+    endiff
+quit %?
+}
+__TCExport {
+    echoerr %@NAME[%0]: the alias IMPORT and subroutine TCExport are deprecated.
+    echoerr Use TCLoad and SelfLoad instead.
+    __SelfLoad
+}
+__SelfDeploy {
+	iff isdir lib: .and. isdir btm:\TCfg\Modules then
+		copy /quy btm:\TCfg\Modules\%@filename[%1] lib:\
+		iff %_copy_files eq 1 then
+			TCInfo %@name[%_batchname] was deployed successfully.
+		elseiff %_copy_errors eq 0 then
+			TCInfo %@name[%_batchname] was already uptodate.
+		else
+			TCWarn Deployment failed.
+		endiff
+	else
+		TCError Environment errors.
+	endiff
+}
+ParseArgs {
+	unset /Q option*
+	setlocal
+		setdos /X-56
+		set rxOption=((?<=\A--)[A-Za-z]+|(?<=\A[/-])[A-Za-z0-9\?]{1})
+		set rxValue=[:=](.+)
+		do i=%# to 1 by -1
+			set sActual=%[%i]
+			set sOptionChrs=%@REGEXSUB[1,%rxOption,%sActual]
+			iff defined sOptionChrs then
+				iff %@LEN[%sOptionChrs]==1 then
+					iff %@ISALPHA[%sOptionChrs]==1 then
+						iff %@ISUPPER[%sOptionChrs]==1 then
+							set var=optionU%@UPPER[%sOptionChrs]
+						else
+							set var=optionL%@UPPER[%sOptionChrs]
+						endiff
+					elseiff %@ISDIGIT[%sOptionChrs]==1 then
+						set var=optionN%sOptionChrs
+					else
+						set var=optionHelp
+					endiff
+				else
+					set var=option%@CAPS[%sOptionChrs]
+				endiff
+				set sOptionValue=%@REGEXSUB[1,%rxValue,%sActual]
+				set %var=%@IF[defined sOptionValue,%sOptionValue,x]
+				shift /%i
+			endiff
+		enddo
+	endlocal option*
+	set /a ArgC=%#
+	setarray /f ArgV[%@inc[%ArgC]]
+	do i=0 to %ArgC
+		set ArgV[%i]=%[%i]
+	enddo
+	unset i
+}

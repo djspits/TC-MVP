@@ -1,0 +1,14 @@
+CDPATH=C:\Users\DJSpi\OneDrive\TCHome;C:\Users\DJSpi\OneDrive\TCHome\dev;C:\Users\DJSpi\OneDrive\TCHome\dev\btm\prj
+COLORDIR=com exe BTM cmd bat vbs vbe wsf wsh msc cpl html: BRI CYA ON BLA;DLL SYS: CYA ON BLA;JUNCTION: YEL ON BLU;DIRS .and. HIDDEN: BRI BLA ON BLA;DIRS: BRI YEL ON BLA;SYSTEM: RED ON BLA;RDONLY: RED ON BLA;HIDDEN: BRI BLA ON BLA;COMPRESSED: GRE ON BLA;ar cpio shar tar LBR BagIt bzip2 bz2 gzip gz lzip lzop xz SQ compress 7z ACE ARC ARJ Cabinet LHA RAR zoo ZIP deb RPM MSI JAR WAR RAR Java EAR cfs cpt DGCA dmg egg GCA kgb LZX MPQ PEA qda rzip sit SQX UDA Xar: GRE ON BLA;bk bak backup old tmp temp ??~ watch bp tunebyte* Thumbs.db* ZbThumbnail.info ehthumbs_vista.db* ~WRL*.* ppinfocache maxdesk.ini PP11Thumbs.ptn?: BRI BLA ON BLA;doc dot docx docm dotx dotm xls xlsx xlsm xltx xltm ppt: BRI GRE ON BLA;epp: BRI MAG ON BLA
+FILECOMPLETION=cd chdir cdd md mkdir rd rmdir pushd sync: dirs;v view: btm bat cmd ini csv log lst txt saved lua pl py ps1 psd1 psm1 vbs c h cpp hpp cs d sed awk m4 mak sql tsq htm html xml css dirs;ide bdg dbg: btm bat cmd ini csv log lst txt saved lua pl py ps1 psd1 psm1 vbs c h cpp hpp cs d sed awk m4 mak sql tsq htm html xml css dirs;ed: epp btm bat cmd ini csv log lst txt saved lua pl py ps1 psd1 psm1 vbs c h cpp hpp cs d sed awk m4 mak sql tsq htm html xml css dirs;shortcut: lnk
+GitDir=C:\Users\DJSpi\OneDrive\TCHome\bin\Git
+nTCDebugLevel=2
+PATH=C:\Users\DJSpi\OneDrive\TCHome\dev\BTM\prj\TCfg\modules;C:\Users\DJSpi\OneDrive\TCHome\lib;C:\Users\DJSpi\OneDrive\TCHome\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32\Wbem;C:\WINDOWS\system32\WindowsPowerShell\v1.0;C:\Program Files\JPSoft\TCMD28;C:\Users\DJSpi\OneDrive\TCHome\bin\Git\cmd
+PROMPT=$W %@IF[%_shell gt 0,($z) ,]%@IF[%? eq 0 .and. %_? eq 0,:-),:-(] %@IF[%_ELEVATED==1,$$,$G]
+PROMPT2=...%@IF[%_ELEVATED==1,$$,$G]
+TCInstall=C:\Program Files\JPSoft\TCMD28
+TCLIB=C:\Users\DJSpi\OneDrive\TCHome\dev\BTM\prj\TCfg\modules;C:\Users\DJSpi\OneDrive\TCHome\lib
+TMP=C:\Users\DJSpi\OneDrive\TCHome\tmp
+DEBUGVARIABLEEXCLUDE=VariableExclude;DebugVariableExclude;HISTORYEXCLUDE;RECYCLEEXCLUDE;TCANSIEXCLUDE;TREEEXCLUDE;CMDLINE2;COLORDIR;FILECOMPLETION
+HISTORYEXCLUDE=tcdialog
+VARIABLEEXCLUDE=VariableExclude;DebugVariableExclude;HISTORYEXCLUDE;RECYCLEEXCLUDE;TCANSIEXCLUDE;TREEEXCLUDE;CMDLINE2;COLORDIR;FILECOMPLETION

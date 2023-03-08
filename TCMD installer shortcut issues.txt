@@ -1,0 +1,7 @@
+TakeCommand's installer creates a shortcut on the desktop in the Sandbox.
+
+The default shortcut contains a disappointing path the TC installation directory where no user wants to be.
+
+Improve usability by deleting the content of the "Start in" property. This will land you on the desktop.
+Improve it even more by changing it to "%USERPROFILE%\Desktop\Shared".
+

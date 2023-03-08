@@ -1,0 +1,69 @@
+:: Run this file with:
+::    ALIAS TCApp=START /I /L "TCC-container" /PGM "%_cmdspec" /D /I /L /Q /@%%@name[%%1].ini /C %%@name[%%1].btm
+::    ALIAS TCApp=START /I /L "TCC-container" /PGM "%_cmdspec" /D /I /L /Q //TCstartPath= /C %%@name[%%1].btm
+::    TCApp <filename>
+::
+:: which expands to:
+::
+:: /D - Disable AutoRun commands
+:: /I - No ini-file, no default library functions, no auto-load plugins and no TCStart / TCExit
+:: /L - Local lists for aliases, functions, directory- and commandhistory.
+:: /Q - Disable Version and Copyright banner
+
+setlocal
+
+	gosub TCInit
+	gosub TCMain
+	gosub TCExit
+
+endlocal
+quit
+
+
+
+:: ----
+:TCInit
+:: ----
+
+    :: All components relative to this batchfile's path.
+	set TCHome=%@rtrim[\,%_batchpath]
+	set TCConfig=%@IF[isdir %TCHome\State,%TCHome\State,%TCHome]
+
+	:: Reading frozen state
+	::set /r %TCConfig\TCEnv.SAVED
+	::alias /r /z %TCConfig\TCAlias.SAVED
+	::function /r /z %TCConfig\TCFunction.SAVED
+	::library /r %TCConfig\TCLibrary.SAVED
+
+return
+
+
+
+:: ----
+:TCMain
+:: ----
+
+	echo Welcome to the *** MINIMAL VIABLE PROGRAM *** for TakeCommand containerized execution.^n
+	
+    iff defined A_letter_from_my_parent then
+        echo I got a letter from home: %A_letter_from_my_parent
+    endiff
+    
+    gosub "...\TCfg\TCReport.btm" ExtendedReport
+
+return
+
+
+
+:: ----
+:TCExit
+:: ----
+
+	:: Prevent the console from closing if running transient or with tcc runtime.
+	iff %_tccrt == 1 .OR. %_transient == 1 then
+		pause ^nPress any key to close container.
+	endiff
+
+return
+
+::EOF

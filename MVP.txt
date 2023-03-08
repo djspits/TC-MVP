@@ -1,0 +1,8 @@
+
+Auteur: D.J. Spits
+
+TakeCommand’s versie van containerized computing
+
+TCStart en TCExit worden automatisch gestart elke keer als een shell wordt gestart; zowel interactieve-als non-interactieve shells. 
+
+Tijdens het uitvoeren van een containerized app heeft de gebruiker geen interactie met de prompt. De meeste ALIAS’es zullen daarom niet worden gebruikt.

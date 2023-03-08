@@ -1,0 +1,17 @@
+comment
+    A "containerized" setup of TC should
+    - always be run as a primary shell
+    	+ use START to create a new session / window in the launcher
+    	+ use /I to inherit the root invironment
+    	+ use /@MVP.ini to suppress reading the default configuration file,
+    	+ idem, to suppress execution of TCStart and TCExit
+    	+ idem, to set lists to Local for the primary shell and any secondary shells
+    		* command history
+			* directory history
+    - read option settings from an app-specific version
+	+ No TakeCommand (host) settings
+
+endcomment
+
+:: Use the following filetype association to setup double-click starting of apps.
+associate /f .btm="C:\Program Files\JPSoft\TCC_RT_29\tcc.exe" /I /@MVP.ini "%%1" %%*

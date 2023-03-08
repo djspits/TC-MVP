@@ -1,0 +1,96 @@
+@echo off
+setlocal
+	seterror 0
+	gosub TCMain
+	seterror %@eval[ %? || %_? ]
+endlocal
+quit %?
+
+
+
+COMMENT
+
+TCC  28.02.15 x64   Windows 11 [Version 10.0.22000.318]
+Copyright 2021 JP Software Inc.  All Rights Reserved
+Registered to PC-DJ
+
+                        W A R N I N G
+                        =============
+
+This script is a catch-all for unanticipated changes in TakeCommand.
+It is located in the %ProgramFiles directory and is executed by TCC
+as a last resort if TakeCommand's configuration data can't be found.
+
+TakeCommand uses reasonable builtin values for its options and
+searches several default locations. If all that fails you will see
+this message.
+
+This frequently happens after:
+- a fresh (re)install 
+- installing a new major version of the product (side by side),
+- installing a minor update,
+especially if you launch TakeCommand through a hyperlink created 
+by the Installer. These are named "Take Command v<nn>" and are
+left behind on the desktop and in the Startmenu.
+
+The console's working directory will be set to the installation
+directory. Users do not have write access there and only members
+of the Administrators group can 'elevate'.
+
+Since TakeCommand is regularly updated it is best to separate your
+work from this directory.
+
+The running instance of TCMD.exe has version 28.2.
+No other versions detected.
+
+TakeCommand was probably updated recently.
+The installer log shows 28.2.15
+
+... at least BatchEcho is OFF and InsertMode is ON. (Pfffew)
+
+[C:\Program Files\JPSoft\TCMD28]
+
+ENDCOMMENT
+
+
+
+:: ----
+:TCMain
+:: ----
+
+:: Path to this version's binaries
+set TCInstall=%@quote[%@rtrim[\,%_batchpath]]
+
+:: Path to the default location for binaries
+set TCDefault=%ProgramFiles\JPSoft
+
+:: Path to the first default location for TCMD.INI
+set TCConfig1=%@quote[%ProgramData\JP Software\Take Command]
+
+:: Fullspec of the updater info.
+set TCUpdater=TCConfig1\updater\tcmdupdate.aiu
+
+
+
+:: Could check registry too.
+set nProducts=%@folders[%@quote[%ProgramData\JP Software]]
+iff %nProducts gt 1 then
+	echo ^nMultiple versions of TakeCommand are installed on this machine.^n
+else
+	echo ^nOnly one version detected.^n
+endiff
+
+echo The running instance of %@IF[%_tctab eq 0,TCC.exe,TCMD.exe] is %_version.
+echo TakeCommand was probably updated recently.
+set Installed_version=%@iniread[%@path[%_cmdspec]updater.ini,General,ApplicationVersion]
+echo The installer log shows %@left[-2,%Installed_version]^n
+
+echo ... at least BatchEcho is OFF and InsertMode is ON. (Pfffew)^n
+
+option //BatchEcho=No
+option //editmode=insert
+
+:: For some reason %(( ... )) doesn't work here.
+return %@eval[ %? || %_? ]
+
+::EOF

@@ -1,0 +1,14 @@
+<Configuration>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>%OneDrive%\TCHome\dev\BTM\prj\btmX\TC-installers\</HostFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+</Configuration>
+
+
+  <MemoryInMB>
+	value
+  </MemoryInMB>
+
